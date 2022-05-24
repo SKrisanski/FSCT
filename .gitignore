@@ -1,9 +1,29 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
 *.npy
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Installer logs
+pip-log.txt
+
+# IDE project files
+.idea
+.vscode
+
+# Distribution / packaging
+*_FSCT_output/
+
+# Examples
 *.las
 !example.las
 model/training_history.csv
-scripts/__pycache__
-.vscode
-venv
-.idea
-docker

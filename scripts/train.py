@@ -1,11 +1,11 @@
-from tools import load_file, save_file, get_fsct_path
-from model import Net
-from train_datasets import TrainingDataset, ValidationDataset
-from fsct_exceptions import NoDataFound
+from scripts.fsct_exceptions import NoDataFound
 import numpy as np
 import torch
 import torch.nn as nn
 import torch.optim as optim
+from scripts.model import Net
+from scripts.tools import load_file, save_file
+from train_datasets import TrainingDataset, ValidationDataset
 from torch_geometric.data import DataLoader
 import glob
 import random

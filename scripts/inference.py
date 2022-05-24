@@ -1,18 +1,15 @@
+import os
 from abc import ABC
 import torch
-import torch_geometric
 from torch_geometric.data import Dataset, DataLoader, Data
 import numpy as np
 import glob
 import pandas as pd
-from preprocessing import Preprocessing
-from model import Net
+from scripts.model import Net
 from sklearn.neighbors import NearestNeighbors
-from scipy import spatial
-import os
 import time
-from tools import get_fsct_path
-from tools import load_file, save_file
+from scripts.tools import get_fsct_path
+from scripts.tools import load_file, save_file
 import shutil
 import sys
 
@@ -69,10 +66,9 @@ class SemanticSegmentation:
     def __init__(self, parameters):
         self.sem_seg_start_time = time.time()
         self.parameters = parameters
-
-        if not self.parameters["use_CPU_only"]:
-            print("Is CUDA available?", torch.cuda.is_available())
-            self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        if not self.parameters['use_cpu_only']:
+            print('Is CUDA available?', torch.cuda.is_available())
+            self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         else:
             self.device = torch.device("cpu")
 
@@ -98,7 +94,7 @@ class SemanticSegmentation:
         test_loader = DataLoader(test_dataset, batch_size=self.parameters["batch_size"], shuffle=False, num_workers=0)
 
         model = Net(num_classes=4).to(self.device)
-        if self.parameters["use_CPU_only"]:
+        if self.parameters["use_cpu_only"]:
             model.load_state_dict(
                 torch.load(
                     get_fsct_path("model") + "/" + self.parameters["model_filename"],
