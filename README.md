@@ -80,6 +80,12 @@ docker run --rm -v ~/datasets:/datasets --name fsct -it fsct-image /bin/bash
 #### Example: 
 > docker run --rm -v ~/datasets:/datasets --name fsct fsct-image -f ~/datasets/mydataset/model.laz
 
+### Run Docker FSCT with GPU support
+You need to install [Nvidia Docker](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker)
+#### Example: 
+> docker run --rm -v $work_dir:/datasets --gpus all --name fsct fsct-image -f /datasets/$dataset/model.laz
+
+
 
 ## FSCT Outputs
 
