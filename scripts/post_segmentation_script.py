@@ -1,30 +1,11 @@
 import numpy as np
-from matplotlib import pyplot as plt
-import matplotlib
-from matplotlib.patches import Circle, PathPatch
-from matplotlib import cm
-from mpl_toolkits.mplot3d import Axes3D
-from skimage.measure import LineModelND, CircleModel, ransac, EllipseModel
-import mpl_toolkits.mplot3d.art3d as art3d
-import math
 import pandas as pd
-from scipy import stats, spatial
+from scipy import spatial
 import time
 import warnings
-from sklearn import metrics
-from sklearn.preprocessing import StandardScaler
-from copy import deepcopy
-from skimage.measure import LineModelND, CircleModel, ransac
-import glob
-from scipy.spatial import ConvexHull, convex_hull_plot_2d
-from scipy.spatial.distance import euclidean
-from math import sin, cos, pi
-import random
 import os
-from sklearn.neighbors import NearestNeighbors
-from tools import load_file, save_file, subsample_point_cloud, get_heights_above_DTM, cluster_dbscan
-from scipy.interpolate import griddata
-from fsct_exceptions import DataQualityError
+from scripts.tools import load_file, save_file, get_heights_above_DTM
+from scripts.fsct_exceptions import DataQualityError
 
 warnings.filterwarnings("ignore", category=RuntimeWarning)
 

@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
-from tools import get_fsct_path
+from scripts.tools import get_fsct_path
 
 
 def training_plotter():

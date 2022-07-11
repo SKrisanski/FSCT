@@ -1,16 +1,10 @@
 import numpy as np
 import time
-import glob
 import random
 import pandas as pd
-from copy import deepcopy
-import matplotlib
-from scipy import spatial
-from sklearn.neighbors import NearestNeighbors
 import threading
-from tools import load_file, save_file, make_folder_structure, subsample_point_cloud, low_resolution_hack_mode
+from scripts.tools import load_file, save_file, make_folder_structure, subsample_point_cloud, low_resolution_hack_mode
 import os
-from multiprocessing import get_context
 
 
 class Preprocessing:
