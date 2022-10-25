@@ -101,14 +101,14 @@ class SemanticSegmentation:
         if self.parameters["use_CPU_only"]:
             model.load_state_dict(
                 torch.load(
-                    get_fsct_path("model") + "/" + self.parameters["model_filename"],
+                    os.path.join(get_fsct_path("model"), self.parameters["model_filename"]),
                     map_location=torch.device("cpu"),
                 ),
                 strict=False,
             )
         else:
             model.load_state_dict(
-                torch.load(get_fsct_path("model") + "/" + self.parameters["model_filename"]),
+                torch.load(os.path.join(get_fsct_path("model"), self.parameters["model_filename"])),
                 strict=False,
             )
 
