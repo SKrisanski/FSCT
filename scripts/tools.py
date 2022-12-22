@@ -1,9 +1,8 @@
+from configparser import SectionProxy
+import json
 from sklearn.neighbors import NearestNeighbors
 import numpy as np
-import glob
 import laspy
-from sklearn.neighbors import NearestNeighbors
-from multiprocessing import Pool, get_context
 import pandas as pd
 import os
 import shutil
@@ -292,3 +291,21 @@ def get_taper(single_tree_cyls, slice_heights, tree_base_height, taper_slice_thi
         else:
             diameters.append(0)
     return np.hstack((np.array([[plot_id, tree_id, x_base, y_base, z_base]]), np.array([diameters])))
+
+
+def parse_config(config: SectionProxy):
+    list = dict()
+    for key, value in config.items():
+        try:  # will handle both ints and floats, even tuples with ints/floats
+            val = config.get(value)
+            if value == 'None':
+                val = None
+            elif value == 'True' or value == 'False':
+                val = config.getboolean(key)
+            else:
+                val = json.loads(value)
+        except json.JSONDecodeError:  # this means it's a string or a tuple with strings
+            val = config.get(value)
+            pass
+        list[key] = val
+    return list

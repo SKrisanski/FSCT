@@ -1,6 +1,6 @@
 import pandas as pd
 
-from run_tools import FSCT, directory_mode, file_mode
+from scripts.run_tools import FSCT, directory_mode, file_mode
 
 
 def combine_multiple_output_CSVs(point_clouds_to_process, csv_file_to_combine):

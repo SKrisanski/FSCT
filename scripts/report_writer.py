@@ -3,12 +3,9 @@ import markdown
 from mdutils import Html
 import pandas as pd
 import numpy as np
-from tools import load_file, subsample_point_cloud
+from scripts.tools import load_file
 from matplotlib import pyplot as plt
 import os
-from scipy.spatial import ConvexHull
-from matplotlib import cm
-from matplotlib.patches import Patch
 from matplotlib.lines import Line2D
 import warnings
 import shutil

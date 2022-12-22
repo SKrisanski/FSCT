@@ -1,41 +1,28 @@
 import math
-import sys
 from copy import deepcopy
 from multiprocessing import get_context
 import networkx as nx
 import numpy as np
 import pandas as pd
 import os
+import time
 from scipy import spatial  # TODO Test if sklearn kdtree is faster.
-from scipy.spatial import ConvexHull
-from scipy.interpolate import CubicSpline
 from scipy.interpolate import griddata
-from skimage.measure import LineModelND, CircleModel, ransac
-from sklearn.cluster import DBSCAN
+from skimage.measure import CircleModel, ransac
 from sklearn.neighbors import NearestNeighbors
-from sklearn.linear_model import RANSACRegressor
-from sklearn.preprocessing import PolynomialFeatures
-from sklearn.pipeline import make_pipeline
-from tools import (
+from skspatial.objects import Plane
+from sklearn.neighbors import BallTree
+from scripts.tools import (
     get_fsct_path,
     load_file,
     save_file,
     low_resolution_hack_mode,
-    subsample_point_cloud,
-    clustering,
     cluster_hdbscan,
     cluster_dbscan,
     get_heights_above_DTM,
-    subsample,
     get_taper,
 )
-from fsct_exceptions import DataQualityError
-import time
-import hdbscan
-from skspatial.objects import Plane
-import warnings
-import scipy
-from sklearn.neighbors import BallTree
+from scripts.fsct_exceptions import DataQualityError
 
 
 class MeasureTree:
@@ -394,7 +381,7 @@ class MeasureTree:
 
             sorted_points = np.vstack((sorted_points, current_point))
             unsorted_points = np.vstack(
-                (unsorted_points[:current_point_index], unsorted_points[current_point_index + 1 :])
+                (unsorted_points[:current_point_index], unsorted_points[current_point_index + 1:])
             )
             kdtree = spatial.cKDTree(unsorted_points[:, :3], leafsize=1000)
             results = kdtree.query_ball_point(np.atleast_2d(current_point)[:, :3], r=distance_tolerance)[0]
@@ -808,6 +795,7 @@ class MeasureTree:
             return False
 
     def run_measurement_extraction(self):
+        taper_array = []
         skeleton_array = np.zeros((0, 3))
         cluster_array = np.zeros((0, 6))
         slice_heights = np.linspace(
@@ -911,8 +899,8 @@ class MeasureTree:
         print("\r", max_j, "/", max_j, end="")
         print("\nDone\n")
 
-        print("Deleting cyls with CCI less than:", self.parameters["minimum_CCI"])
-        full_cyl_array = full_cyl_array[full_cyl_array[:, self.cyl_dict["CCI"]] >= self.parameters["minimum_CCI"]]
+        print("Deleting cyls with CCI less than:", self.parameters["minimum_cci"])
+        full_cyl_array = full_cyl_array[full_cyl_array[:, self.cyl_dict["CCI"]] >= self.parameters["minimum_cci"]]
 
         # cyl_array = [x,y,z,nx,ny,nz,r,CCI,branch_id,tree_id,segment_volume,parent_branch_id]
         print("Saving cylinder array...")

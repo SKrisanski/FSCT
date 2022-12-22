@@ -40,7 +40,7 @@ it works (or doesn't), please let me know!
 If you have any difficulties or find any bugs, please get in touch and I will try to help you get it going. 
 Suggestions for improvements are greatly appreciated.
 
-If you do not have an Nvidia GPU, please set the ```use_CPU_only``` setting in ```run.py``` to True.
+If you do not have an Nvidia GPU, please set the ```use_cpu_only``` setting in ```run.py``` to True.
 
 ## How to use
 
@@ -53,6 +53,39 @@ this will contain the following outputs.
 
 Start with small plots containing at least some trees. The tree measurement code will currently cause an error if it
 finds no trees in the point cloud.
+
+## Docker
+1. Create docker volume to access from host
+```
+docker volume create datasets
+```
+2. Build your docker image 
+```
+docker build --rm -t fsct-image .
+```
+### Run image (ensure rebuild docker image before running)
+```
+docker run -i --rm \
+    -v "$(pwd)/datasets:/datasets" \
+    --name fsct \
+    fsct [--additional --parameters --here]
+```
+* Run docker container and get into shell
+```
+docker run --rm -v ~/datasets:/datasets --name fsct -it fsct-image /bin/bash 
+```
+
+* Run docker FSCT with arguments
+
+#### Example: 
+> docker run --rm -v ~/datasets:/datasets --name fsct fsct-image -f ~/datasets/mydataset/model.laz
+
+### Run Docker FSCT with GPU support
+You need to install [Nvidia Docker](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker)
+#### Example: 
+> docker run --rm -v $work_dir:/datasets --gpus all --name fsct fsct-image -f /datasets/$dataset/model.laz
+
+
 
 ## FSCT Outputs
 

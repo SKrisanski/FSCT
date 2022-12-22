@@ -1,8 +1,8 @@
-from preprocessing import Preprocessing
-from inference import SemanticSegmentation
-from post_segmentation_script import PostProcessing
-from measure import MeasureTree
-from report_writer import ReportWriter
+from scripts.preprocessing import Preprocessing
+from scripts.inference import SemanticSegmentation
+from scripts.post_segmentation_script import PostProcessing
+from scripts.measure import MeasureTree
+from scripts.report_writer import ReportWriter
 import glob
 import tkinter as tk
 import tkinter.filedialog as fd
