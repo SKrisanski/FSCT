@@ -26,7 +26,7 @@ In Anaconda Prompt, type the following (replacing the path to FSCT and your desi
 
 ```shell
 cd PATH_TO_FSCT-MAIN_DIRECTORY
-conda create --name YOUR_ENVIRONMENT_NAME_HERE
+conda create --name YOUR_ENVIRONMENT_NAME_HERE python==3.9
 conda activate YOUR_ENVIRONMENT_NAME_HERE
 conda install pip
 pip install -r requirements.txt
@@ -178,8 +178,8 @@ cloud to the plot_radius. See the **Tree Aware Plot Cropping** section in User P
 **Warning: FSCT is computationally expensive in its current form.** Fortunately, it is still considerably faster than a human 
 at what it does.
 
-It is strongly recommended to have a CUDA compatible GPU (Nvidia) for running this tool. This can be run on CPU
-only, but expect inference to take a long time.
+It is **strongly recommended** to have a CUDA compatible GPU (Nvidia) for running this tool. 
+This can be run on CPU only, but expect inference to take a long time. **CPU also appears to give worse semantic segmentation results than GPU. I did not expect this and I do not know why this is the case. If you have any ideas about why they are so different, please let me know!**
 
 It should be able to be run on most modern gaming desktop PCs (or decently powerful laptops).
 

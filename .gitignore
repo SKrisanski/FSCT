@@ -22,6 +22,7 @@ pip-log.txt
 
 # Distribution / packaging
 *_FSCT_output/
+*FSCT_output/
 
 # Examples
 *.las
