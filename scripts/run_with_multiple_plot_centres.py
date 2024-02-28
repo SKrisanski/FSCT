@@ -7,8 +7,9 @@ if __name__ == "__main__":
     This script is an example of how to provide multiple different plot centres with your input point clouds.
     """
     point_clouds_to_process = [
-        ["E:/your_point_cloud1.las", [your_plot_centre_X_coord, your_plot_centre_Y_coord], your_plot_radius],
-        ["E:/your_point_cloud2.las", [your_plot_centre_X_coord, your_plot_centre_Y_coord], your_plot_radius],
+        ["/Volumes/bqlg43/prs/MILLIE PRS/PHD/TLS/DATA/LAS/RS67_Day_2.las", [-0.6055721435546870, -1.54360369873047], 20],
+        ["/Volumes/bqlg43/prs/MILLIE PRS/PHD/TLS/DATA/LAS/RS66.las", [-1.512628479, -2.375072144], 20],
+        ["/Volumes/bqlg43/prs/MILLIE PRS/PHD/TLS/DATA/LAS/RS65.las", [-0.786155029, -0.856148163], 20],
     ]
 
     for point_cloud_filename, plot_centre, plot_radius in point_clouds_to_process:
@@ -19,7 +20,7 @@ if __name__ == "__main__":
             plot_radius_buffer=0,
             batch_size=18,
             num_cpu_cores=0,
-            use_CPU_only=False,
+            use_CPU_only=True,
             # Optional settings - Generally leave as they are.
             slice_thickness=0.15,
             # If your point cloud resolution is a bit low (and only if the stem segmentation is still reasonably accurate), try increasing this to 0.2.
@@ -35,7 +36,7 @@ if __name__ == "__main__":
             generate_output_point_cloud=1,
             # Turn on if you would like a semantic and instance segmented point cloud. This mode will override the "sort_stems" setting if on.
             # If you activate "tree aware plot cropping mode", this function will use it.
-            ground_veg_cutoff_height=3,
+            ground_veg_cutoff_height=2,
             # Any vegetation points below this height are considered to be understory and are not assigned to individual trees.
             veg_sorting_range=1.5,
             # Vegetation points can be, at most, this far away from a cylinder horizontally to be matched to a particular tree.

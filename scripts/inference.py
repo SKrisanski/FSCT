@@ -1,4 +1,4 @@
-from abc import ABC
+from abc import ABC, abstractmethod
 import torch
 import torch_geometric
 from torch_geometric.data import Dataset, DataLoader, Data
@@ -20,9 +20,10 @@ sys.setrecursionlimit(10**8)  # Can be necessary for dealing with large point cl
 
 
 class TestingDataset(Dataset, ABC):
+    
     def __init__(self, root_dir, points_per_box, device):
-        super().__init__()
-        self.filenames = glob.glob(root_dir + "*.npy")
+        super(). __init__()
+        self.filenames = glob.glob(os.path.join(root_dir, '*.npy'))
         self.device = device
         self.points_per_box = points_per_box
 
@@ -88,12 +89,11 @@ class SemanticSegmentation:
         self.filename = "working_point_cloud.las"
         self.directory = self.output_dir
         self.plot_summary = pd.read_csv(self.output_dir + "plot_summary.csv", index_col=None)
-        self.plot_centre = [[float(self.plot_summary["Plot Centre X"]), float(self.plot_summary["Plot Centre Y"])]]
+        self.plot_centre = [[float(self.plot_summary["Plot Centre X"].iloc[0]), float(self.plot_summary["Plot Centre Y"].iloc[0])]]
 
     def inference(self):
-        test_dataset = TestingDataset(
-            root_dir=self.working_dir, points_per_box=self.parameters["max_points_per_box"], device=self.device
-        )
+        test_dataset = TestingDataset(root_dir=self.working_dir, points_per_box=self.parameters["max_points_per_box"], 
+                                      device=self.device)
 
         test_loader = DataLoader(test_dataset, batch_size=self.parameters["batch_size"], shuffle=False, num_workers=0)
 

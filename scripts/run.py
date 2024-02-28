@@ -1,6 +1,8 @@
 from run_tools import FSCT, directory_mode, file_mode
 from other_parameters import other_parameters
 
+
+
 if __name__ == "__main__":
     """Choose one of the following or modify as needed.
     Directory mode will find all .las files within a directory and sub directories but will ignore any .las files in
@@ -14,22 +16,21 @@ if __name__ == "__main__":
     """
     # point_clouds_to_process = directory_mode()
     # point_clouds_to_process = ['full_path_to_your_point_cloud.las', 'full_path_to_your_second_point_cloud.las', etc.]
-    point_clouds_to_process = file_mode()
-
+    point_clouds_to_process = ["/Volumes/prs/MILLIE PRS/PHD/TLS/DATA/LAS/Hamsterly/merged.las"]
     for point_cloud_filename in point_clouds_to_process:
         parameters = dict(
-            point_cloud_filename=point_cloud_filename,
+            point_cloud_filename = point_cloud_filename,
             # Adjust if needed
             plot_centre=None,  # [X, Y] Coordinates of the plot centre (metres). If "None", plot_centre is computed based on the point cloud bounding box.
             # Circular Plot options - Leave at 0 if not using.
-            plot_radius=0,  # If 0 m, the plot is not cropped. Otherwise, the plot is cylindrically cropped from the plot centre with plot_radius + plot_radius_buffer.
-            plot_radius_buffer=0,  # See README. If non-zero, this is used for "Tree Aware Plot Cropping Mode".
+            plot_radius=5,  # If 0 m, the plot is not cropped. Otherwise, the plot is cylindrically cropped from the plot centre with plot_radius + plot_radius_buffer.
+            plot_radius_buffer=5,  # See README. If non-zero, this is used for "Tree Aware Plot Cropping Mode".
             # Set these appropriately for your hardware.
             batch_size=2,  # You will get CUDA errors if this is too high, as you will run out of VRAM. This won't be an issue if running on CPU only. Must be >= 2.
             num_cpu_cores=0,  # Number of CPU cores you want to use. If you run out of RAM, lower this. 0 means ALL cores.
-            use_CPU_only=False,  # Set to True if you do not have an Nvidia GPU, or if you don't have enough vRAM.
+            use_CPU_only=True,  # Set to True if you do not have an Nvidia GPU, or if you don't have enough vRAM.
             # Optional settings - Generally leave as they are.
-            slice_thickness=0.15,  # If your point cloud resolution is a bit low (and only if the stem segmentation is still reasonably accurate), try increasing this to 0.2.
+            slice_thickness=0.10,  # If your point cloud resolution is a bit low (and only if the stem segmentation is still reasonably accurate), try increasing this to 0.2.
             # If your point cloud is really dense, you may get away with 0.1.
             slice_increment=0.05,  # The smaller this is, the better your results will be, however, this increases the run time.
             sort_stems=1,  # If you don't need the sorted stem points, turning this off speeds things up.
@@ -38,7 +39,7 @@ if __name__ == "__main__":
             tree_base_cutoff_height=5,  # A tree must have a cylinder measurement below this height above the DTM to be kept. This filters unsorted branches from being called individual trees.
             generate_output_point_cloud=1,  # Turn on if you would like a semantic and instance segmented point cloud. This mode will override the "sort_stems" setting if on.
             # If you activate "tree aware plot cropping mode", this function will use it.
-            ground_veg_cutoff_height=3,  # Any vegetation points below this height are considered to be understory and are not assigned to individual trees.
+            ground_veg_cutoff_height=1,  # Any vegetation points below this height are considered to be understory and are not assigned to individual trees.
             veg_sorting_range=1.5,  # Vegetation points can be, at most, this far away from a cylinder horizontally to be matched to a particular tree.
             stem_sorting_range=1,  # Stem points can be, at most, this far away from a cylinder in 3D to be matched to a particular tree.
             taper_measurement_height_min=0,  # Lowest height to measure diameter for taper output.
