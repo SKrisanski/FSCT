@@ -6,11 +6,7 @@ if __name__ == "__main__":
     """
     This script is an example of how to provide multiple different plot centres with your input point clouds.
     """
-    point_clouds_to_process = [
-        ["/Volumes/bqlg43/prs/MILLIE PRS/PHD/TLS/DATA/LAS/RS67_Day_2.las", [-0.6055721435546870, -1.54360369873047], 20],
-        ["/Volumes/bqlg43/prs/MILLIE PRS/PHD/TLS/DATA/LAS/RS66.las", [-1.512628479, -2.375072144], 20],
-        ["/Volumes/bqlg43/prs/MILLIE PRS/PHD/TLS/DATA/LAS/RS65.las", [-0.786155029, -0.856148163], 20],
-    ]
+    point_clouds_to_process =  []
 
     for point_cloud_filename, plot_centre, plot_radius in point_clouds_to_process:
         parameters = dict(

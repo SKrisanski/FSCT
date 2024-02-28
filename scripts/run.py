@@ -16,7 +16,7 @@ if __name__ == "__main__":
     """
     # point_clouds_to_process = directory_mode()
     # point_clouds_to_process = ['full_path_to_your_point_cloud.las', 'full_path_to_your_second_point_cloud.las', etc.]
-    point_clouds_to_process = ["/Volumes/prs/MILLIE PRS/PHD/TLS/DATA/LAS/Hamsterly/merged.las"]
+    point_clouds_to_process = directory_mode()
     for point_cloud_filename in point_clouds_to_process:
         parameters = dict(
             point_cloud_filename = point_cloud_filename,
