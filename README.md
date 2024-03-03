@@ -16,6 +16,13 @@ This may be improved in future versions, as it should be easily fixed with addit
 
 **A video showing the outputs of the tool is provided here: https://youtu.be/rej5Bu57AqM**
 
+## My contributions
+
+I have edited this code to update it and have solved some of the bugs that have cropped up for other users e.g. incompatible package installations/TypeErrors. This has been done on a Mac Studio M2 ultra and I used all 24 CPU cores for this on the CPU only setting. My TLS was also 74 million+ points a scan so I have not tested minimum numbers of points. The code now runs on python 3.11.7. 
+
+I might adapt the training data for European Arctic specific contexts, as per my research interests, as the original data relates to western Australia. I am collecting TLS data myself over summer 2024 in the European Arctic and may update the training data so that this is useable for large scale plot cleaning/metric extraction for forestry in these contexts. 
+
+The only slight bug is it looks for the tools and model.pth files in /x/x/x/FSCT/model or /tools. The way I got around this was to simply make another folder called FSCT and copy the file/folder in there so it would find it where it expected as the folder when I download from FSCT is called FSCT-main. I used VS code, pip3, and a conda environment.
 
 ## Installation
 
@@ -26,7 +33,7 @@ In Anaconda Prompt, type the following (replacing the path to FSCT and your desi
 
 ```shell
 cd PATH_TO_FSCT-MAIN_DIRECTORY
-conda create --name YOUR_ENVIRONMENT_NAME_HERE python==3.9
+conda create --name YOUR_ENVIRONMENT_NAME_HERE
 conda activate YOUR_ENVIRONMENT_NAME_HERE
 conda install pip
 pip install -r requirements.txt
@@ -34,8 +41,6 @@ pip install -r requirements.txt
 
 This should hopefully install all required packages for you.
 These are the instructions for Windows 10 and Linux.
-I have not tested this on Mac. If someone with a Mac tests this and 
-it works (or doesn't), please let me know!
 
 If you have any difficulties or find any bugs, please get in touch and I will try to help you get it going. 
 Suggestions for improvements are greatly appreciated.

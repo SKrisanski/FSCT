@@ -7,6 +7,9 @@ import glob
 import tkinter as tk
 import tkinter.filedialog as fd
 import os
+import numpy
+numpy.float = numpy.float64
+numpy.int = numpy.int_
 
 
 def FSCT(
